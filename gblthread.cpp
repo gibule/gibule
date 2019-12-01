@@ -19,11 +19,9 @@ void GBLThread::start()
 void GBLThread::run()
 {
 
-
 }
 
 void GBLThread::wait()
 {
-
     thr.join();
 }

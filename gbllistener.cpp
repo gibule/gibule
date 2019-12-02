@@ -9,7 +9,7 @@ void GBLListener::run()
 {
     while(1)
     {
-        cout<<"Listener"<<endl;
+        cout<<"ragaca"<<endl;
         sleep(2);
     }
 

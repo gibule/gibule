@@ -1,69 +1,42 @@
 #include "gblsocket.h"
 
+using namespace std;
 
-namespace gbl  {
+namespace gbl {
 
 
 
-
- Sockaddress::Sockaddress(string s, unsigned short int a)
+Sockaddress::Sockaddress(string s, ushort a)
 {
-    inet_pton(AF_INET,s.c_str(),&ipaddress.sin_addr);
-    ipaddress.sin_port=a;
-    ipaddress.sin_family=AF_INET;
-
-
+    inet_pton(AF_INET,s.c_str(),&ipadress.sin_addr);
+    ipadress.sin_port=a;
+    ipadress.sin_family=AF_INET;
 }
 
- std::string Sockaddress::getAddress()
- {
-     char client_ip[98];
-
-     inet_ntop(AF_INET,&ipaddress.sin_addr,client_ip,98);
-
-     return std::string (client_ip);
-
- }
-
-unsigned short int Sockaddress::getPort()
+std::string Sockaddress::getAddress()
 {
-    return ipaddress.sin_port;
-}
+char client_ip[100];
+inet_ntop(AF_INET,&ipadress.sin_addr,client_ip,100);
+return std::string(client_ip);
 
-struct sockaddr_in* Sockaddress::getipaddress()
-{
-
-    return &ipaddress;
-
-
-}
- int GBLSocket::socket_descriptor()
-{
-
-     sd = socket(AF_INET, SOCK_STREAM, 0);
-    return  (sd);
-
-}
-
-int GBLSocket::bind()
-{
-
-    int b=::bind(sd,(struct sockaddr*)sockaddress.getipaddress(),sizeof (sockaddr_in));
-
-    return int (b);
-
-
-
-}
-
-
-GBLSocket :: GBLSocket(Sockaddress sockaddr) : sockaddress(sockaddr)
-{
 
 }
 
 
 
 
+
+ushort Sockaddress::getPort()
+{
+    return ipadress.sin_port;
+
+}
+
+
+
+GBLSocket::GBLSocket()
+{
+
+}
 
 }

@@ -2,42 +2,39 @@
 #define GBLSOCKET_H
 #include <iostream>
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <thread>
-#include <atomic>
-#include <mutex>
+#include <iostream>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 using namespace std;
 
-namespace gbl  {
+namespace  gbl {
 
 
 
 class Sockaddress
 {
+
 public:
-    Sockaddress(string s, unsigned short int a);
+    Sockaddress(string s, ushort a);
 
-    std::string getAddress();
-
-    unsigned short int getPort ();
-
-    struct sockaddr_in *getipaddress();
-
+    string getAddress();
+    ushort getPort();
 
 
 private:
-
-
-struct sockaddr_in ipaddress;
-
-
-
-
+    struct sockaddr_in ipadress;
 
 
 };
@@ -46,21 +43,9 @@ struct sockaddr_in ipaddress;
 class GBLSocket
 {
 public:
-GBLSocket(Sockaddress sockaddr);
-
-    int socket_descriptor();
-    Sockaddress sockaddress;
-
-    int bind();
-
-
-private:
-
-    int sd;
-
+    GBLSocket();
 
 };
-
 
 }
 #endif // GBLSOCKET_H

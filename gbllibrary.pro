@@ -8,9 +8,13 @@ SOURCES += \
         main.cpp \
     gblsocket.cpp \
     gblthread.cpp \
-    gbllistener.cpp
+    gbllistener.cpp \
+    gblworker.cpp \
+    gblchat.cpp
 
 HEADERS += \
     gblsocket.h \
     gblthread.h \
-    gbllistener.h
+    gbllistener.h \
+    gblworker.h \
+    gblchat.h

@@ -12,16 +12,23 @@
 #include <atomic>
 #include <mutex>
 #include "gblthread.h"
+#include <gblsocket.h>
+#include <gblworker.h>
+#include <vector>
 using namespace std;
-
+using namespace gbl;
 
 class GBLListener : public GBLThread
 {
 public:
-    GBLListener();
+    GBLListener(Sockaddress addr);
 
     virtual void run();
 
+
+    GBLSocket listenSocket;
+
+    vector<GBLWorker*> workers;
 
 
 };

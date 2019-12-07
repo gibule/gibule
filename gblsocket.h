@@ -20,6 +20,8 @@ namespace gbl  {
 class Sockaddress
 {
 public:
+
+    Sockaddress();
     Sockaddress(string s, unsigned short int a);
 
     std::string getAddress();
@@ -29,11 +31,12 @@ public:
     struct sockaddr_in *getipaddress();
 
 
+    struct sockaddr_in ipaddress;
 
 private:
 
 
-struct sockaddr_in ipaddress;
+
 
 
 
@@ -48,15 +51,15 @@ class GBLSocket
 public:
 GBLSocket(Sockaddress sockaddr);
 
-    int socket_descriptor();
+    int init_socket();
     Sockaddress sockaddress;
 
     int bind();
-
+    int sd;
 
 private:
 
-    int sd;
+
 
 
 };

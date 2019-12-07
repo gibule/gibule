@@ -3,16 +3,17 @@
 
 namespace gbl  {
 
+Sockaddress::Sockaddress()
+{
 
 
+}
 
  Sockaddress::Sockaddress(string s, unsigned short int a)
 {
     inet_pton(AF_INET,s.c_str(),&ipaddress.sin_addr);
     ipaddress.sin_port=a;
     ipaddress.sin_family=AF_INET;
-
-
 }
 
  std::string Sockaddress::getAddress()
@@ -37,10 +38,9 @@ struct sockaddr_in* Sockaddress::getipaddress()
 
 
 }
- int GBLSocket::socket_descriptor()
+ int GBLSocket::init_socket()
 {
-
-     sd = socket(AF_INET, SOCK_STREAM, 0);
+    sd = socket(AF_INET, SOCK_STREAM, 0);
     return  (sd);
 
 }
@@ -50,10 +50,7 @@ int GBLSocket::bind()
 
     int b=::bind(sd,(struct sockaddr*)sockaddress.getipaddress(),sizeof (sockaddr_in));
 
-    return int (b);
-
-
-
+    return b;
 }
 
 

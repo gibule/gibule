@@ -14,8 +14,17 @@ int main ()
 {
 
 
+    Sockaddress sa("192.168.0.114", 1234);
+
+    GBLListener listener(sa);
+    listener.start();
+    while(1)
+    {
+
+    }
 
 
+   /*
     GBLSocket g(Sockaddress("127.0.0.1", 1234));
     int b = g.sockaddress.getPort();
     string ip = g.sockaddress.getAddress();
@@ -41,7 +50,7 @@ int main ()
     }
 
     listener.wait();
-
+*/
 
 
 

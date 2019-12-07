@@ -23,8 +23,9 @@ public:
 
     virtual void run();
     void start();
+    void stop();
     void wait();
-
+    bool isRunning();
 
 private:
     thread thr;

@@ -15,6 +15,7 @@ void GBLListener::run()
     else
     {
         cout << "bind error"<< endl;
+        perror(0);
     }
 
     if (listen(sock,10)==0)
@@ -28,12 +29,12 @@ void GBLListener::run()
     while(1)
     {
         Sockaddress peeraddress;
-        socklen_t peersize;
+        socklen_t peersize=sizeof(struct sockaddr_in);
         int clientSD=accept(listenSocket.sd,(struct sockaddr*)&peeraddress.ipaddress,&peersize);
         std::cout << "======== " <<  peersize << std::endl;
         if (clientSD>0)
         {
-            cout << "Accepted" << peeraddress.getAddress() << peeraddress.getPort() << endl;
+            cout << "Accepted peer: " << peeraddress.getAddress() << ":" << peeraddress.getPort() << endl;
             GBLWorker *w;
             w=new  GBLWorker();
             w->wsd=clientSD;

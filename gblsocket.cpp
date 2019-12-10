@@ -6,7 +6,6 @@ namespace gbl  {
 Sockaddress::Sockaddress()
 {
 
-
 }
 
  Sockaddress::Sockaddress(string s, unsigned short int a)
@@ -47,9 +46,7 @@ struct sockaddr_in* Sockaddress::getipaddress()
 
 int GBLSocket::bind()
 {
-
     int b=::bind(sd,(struct sockaddr*)sockaddress.getipaddress(),sizeof (sockaddr_in));
-
     return b;
 }
 
@@ -57,6 +54,17 @@ int GBLSocket::bind()
 GBLSocket :: GBLSocket(Sockaddress sockaddr) : sockaddress(sockaddr)
 {
 
+}
+
+bool GBLSocket :: sendData(ByteArray data)
+{
+
+    return true;
+}
+
+bool GBLSocket :: receiveData(ByteArray &data)
+{
+    return true;
 }
 
 

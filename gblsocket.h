@@ -11,11 +11,14 @@
 #include <thread>
 #include <atomic>
 #include <mutex>
+#include <vector>
+#include <gblworker.h>
 using namespace std;
 
 namespace gbl  {
 
 
+typedef std::vector<char> ByteArray;
 
 class Sockaddress
 {
@@ -35,14 +38,6 @@ public:
 
 private:
 
-
-
-
-
-
-
-
-
 };
 
 
@@ -55,6 +50,9 @@ GBLSocket(Sockaddress sockaddr);
     Sockaddress sockaddress;
 
     int bind();
+    bool sendData(ByteArray data);
+    bool receiveData(ByteArray &data);
+
     int sd;
 
 private:

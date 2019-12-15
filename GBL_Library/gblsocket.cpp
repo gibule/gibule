@@ -94,9 +94,12 @@ bool GBLSocket :: sendData(ByteArray data)
 
 bool GBLSocket :: receiveData(ByteArray &data)
 {
-//    ::recv(sd,(char*)data.data(), data.size(),MSG_DONTWAIT);
-    ::recv(sd,static_cast<char*>(data.data()),data.size(),MSG_DONTWAIT);
-    return true;
+    ssize_t r = ::recv(sd,static_cast<char*>(data.data()),256,MSG_DONTWAIT);
+    if(r==0)
+    {
+        state = ssDisconnected;
+    }
+    return r > 0;
 }
 
 bool GBLSocket :: sendData(string data)
@@ -110,25 +113,18 @@ bool GBLSocket :: sendData(string data)
 
 bool GBLSocket :: receiveData(string &data)
 {
-    //std::cout << "===============================" << std::endl;
-    char *buf=(char*)malloc(255);
-    size_t sz=255;
-    ssize_t r = ::recv(sd,buf,sz,MSG_DONTWAIT);
-    //ssize_t r = ::recv(sd,buf,sz,0);
+    char buf[256];
+    ssize_t r = ::recv(sd,buf,256,MSG_DONTWAIT);
     if(r > 0)
     {
-        data=string(buf,(size_t)r);
+        data=string(buf,static_cast<size_t>(r));
     }
     else if(r==0)
     {
         state = ssDisconnected;
     }
-    std::cout << "============  " << r << " state= " << state << std::endl;
-
+    //std::cout << "============  " << r << " state= " << state << std::endl;
     return r > 0;
-
-    //std::cout << buf << std::endl;
-
 }
 
 

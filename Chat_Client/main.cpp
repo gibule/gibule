@@ -23,7 +23,7 @@ int main()
        std::cout << "ERROR" << std::endl;
 
 
-   for(int i=0; i<60; i++)
+   for(int i=0; i<5; i++)
    {
        socket.sendData(string ("Message from client: ")+std::to_string(i));
        sleep(1);

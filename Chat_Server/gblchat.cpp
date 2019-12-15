@@ -22,7 +22,7 @@ void GBLChat::onwork()
         std::cout << "Connection closed, Thread Stoped" << std::endl;
     }
 
-    usleep(1000000);
+    usleep(100);
 }
 
 void GBLChat::onstop()

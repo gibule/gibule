@@ -20,6 +20,14 @@ namespace gbl  {
 
 typedef vector<char> ByteArray;
 
+enum SocketState
+{
+    ssNew,
+    ssConnected,
+    ssDisconnected
+};
+
+
 class Sockaddress
 {
 public:
@@ -59,10 +67,13 @@ public:
     bool receiveData(string &data);
     void close();
 
+    void setState(SocketState ss);
+    SocketState getState();
 
     int sd;
 
 private:
+   SocketState state;
 
 
 

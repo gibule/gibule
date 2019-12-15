@@ -60,18 +60,14 @@ public:
                 GBLWorker *w;
                 w=new  T();
                 w->wsd.sd=clientSD;
+                w->wsd.setState(ssConnected);
                 w->start();
                 workers.push_back(w);
 
             }
             sleep(2);
         }
-
-
     }
-
-
-
 
     GBLSocket listenSocket;
 

@@ -22,9 +22,12 @@ int main()
    else
        std::cout << "ERROR" << std::endl;
 
-    socket.sendData(string ("Yes connected Yes"));
 
-    sleep(5);
+   for(int i=0; i<60; i++)
+   {
+       socket.sendData(string ("Message from client: ")+std::to_string(i));
+       sleep(1);
+   }
 
     socket.close();
 

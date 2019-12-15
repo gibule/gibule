@@ -16,7 +16,13 @@ void GBLChat::onwork()
     s.resize(100);
     if(wsd.receiveData(s))
         cout << s << endl;
-    sleep(1);
+    if(wsd.getState()==ssDisconnected)
+    {
+        stop();
+        std::cout << "Connection closed, Thread Stoped" << std::endl;
+    }
+
+    usleep(1000000);
 }
 
 void GBLChat::onstop()

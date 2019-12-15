@@ -52,8 +52,18 @@ void GBLSocket::close()
  int GBLSocket::init_socket()
 {
     sd = socket(AF_INET, SOCK_STREAM, 0);
+    state = ssNew;
     return  (sd);
+}
 
+void GBLSocket::setState(SocketState ss)
+{
+    state = ss;
+}
+
+SocketState GBLSocket::getState()
+{
+    return state;
 }
 
 int GBLSocket::bind()
@@ -64,12 +74,11 @@ int GBLSocket::bind()
 }
 bool GBLSocket::connect()
 {
-
    int c= ::connect(sd,reinterpret_cast<struct sockaddr*>(sockaddress.getipaddress()),sizeof (sockaddr_in));
-
    ::perror("error:");
+   if(c==0)
+       state=ssConnected;
    return c==0;
-
 }
 
 GBLSocket :: GBLSocket(Sockaddress sockaddr) : sockaddress(sockaddr)
@@ -104,14 +113,17 @@ bool GBLSocket :: receiveData(string &data)
     //std::cout << "===============================" << std::endl;
     char *buf=(char*)malloc(255);
     size_t sz=255;
-    //::recv(sd,buf,sz,MSG_DONTWAIT);
-    ssize_t r = ::recv(sd,buf,sz,0);
+    ssize_t r = ::recv(sd,buf,sz,MSG_DONTWAIT);
+    //ssize_t r = ::recv(sd,buf,sz,0);
     if(r > 0)
     {
         data=string(buf,(size_t)r);
     }
-
-    std::cout << "============  " << r << std::endl;
+    else if(r==0)
+    {
+        state = ssDisconnected;
+    }
+    std::cout << "============  " << r << " state= " << state << std::endl;
 
     return r > 0;
 

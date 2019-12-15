@@ -1,7 +1,9 @@
 #ifndef GBLWORKER_H
 #define GBLWORKER_H
-#include <gblthread.h>
+#include "gblthread.h"
+#include "gblsocket.h"
 using namespace std;
+using namespace gbl;
 
 class GBLWorker : public GBLThread
 {
@@ -14,7 +16,7 @@ public:
    virtual void onwork(){}
    virtual void onstop(){}
 
-   int wsd;
+   GBLSocket wsd;
 
 
 

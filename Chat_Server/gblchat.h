@@ -1,9 +1,9 @@
 #ifndef GBLCHAT_H
 #define GBLCHAT_H
 
-#include "gblworker.h"
+#include "../GBL_Library/gblworker.h"
 
-class GBLChat
+class GBLChat : public GBLWorker
 {
 public:
     GBLChat();

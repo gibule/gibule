@@ -6,17 +6,19 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <gblsocket.h>
-#include <gbllistener.h>
+#include <../GBL_Library/gblsocket.h>
+#include <../GBL_Library/gbllistener.h>
+#include <gblchat.h>
+
 using namespace std;
 using namespace gbl;
 int main ()
 {
 
 
-    Sockaddress sa("192.168.0.114", 1234);
+    Sockaddress sa("127.0.0.1", 1234);
 
-    GBLListener listener(sa);
+    GBLListener<GBLChat> listener(sa);
     listener.start();
     while(1)
     {

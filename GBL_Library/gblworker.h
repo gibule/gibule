@@ -1,9 +1,14 @@
 #ifndef GBLWORKER_H
 #define GBLWORKER_H
+#include <map>
 #include "gblthread.h"
 #include "gblsocket.h"
 using namespace std;
 using namespace gbl;
+
+
+template <class T>
+class GBLListener;
 
 class GBLWorker : public GBLThread
 {
@@ -16,8 +21,13 @@ public:
    virtual void onwork(){}
    virtual void onstop(){}
 
-   GBLSocket wsd;
+   string peerAddress;
 
+   GBLSocket wsd;
+   //GBLListener<GBLWorker> *listener;
+
+   map<string,GBLWorker*> *workers;
+   mutex *listmtx;
 
 
 };

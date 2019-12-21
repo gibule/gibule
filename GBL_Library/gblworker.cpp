@@ -1,4 +1,5 @@
 #include "gblworker.h"
+#include "gbllistener.h"
 
 GBLWorker::GBLWorker()
 {

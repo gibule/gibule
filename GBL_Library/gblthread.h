@@ -26,6 +26,7 @@ public:
     void stop();
     void wait();
     bool isRunning();
+    mutex mtx;
 
 private:
     thread thr;

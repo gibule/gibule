@@ -12,6 +12,7 @@
 #include <atomic>
 #include <mutex>
 #include <vector>
+#include <map>
 
 #include "gblthread.h"
 #include "gblsocket.h"
@@ -52,6 +53,7 @@ public:
         {
             Sockaddress peeraddress;
             socklen_t peersize=sizeof(struct sockaddr_in);
+            test = 1234;
             int clientSD=accept(listenSocket.sd,(struct sockaddr*)&peeraddress.ipaddress,&peersize);
             std::cout << "======== " <<  peersize << std::endl;
             if (clientSD>0)
@@ -59,10 +61,16 @@ public:
                 cout << "Accepted peer: " << peeraddress.getAddress() << ":" << peeraddress.getPort() << endl;
                 GBLWorker *w;
                 w=new  T();
+                w->peerAddress=peeraddress.getAddress();
                 w->wsd.sd=clientSD;
                 w->wsd.setState(ssConnected);
+                w->workers = &workers;
+                w->listmtx=&mtx;
+                mtx.lock();
+                workers.insert(pair<string,GBLWorker*>(w->peerAddress,w));
+                mtx.unlock();
+
                 w->start();
-                workers.push_back(w);
 
             }
             sleep(2);
@@ -71,7 +79,8 @@ public:
 
     GBLSocket listenSocket;
 
-    vector<GBLWorker*> workers;
+    int test;
+    map<string,GBLWorker*> workers;
 
 
 };

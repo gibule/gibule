@@ -75,7 +75,7 @@ int GBLSocket::bind()
 bool GBLSocket::connect()
 {
    int c= ::connect(sd,reinterpret_cast<struct sockaddr*>(sockaddress.getipaddress()),sizeof (sockaddr_in));
-   ::perror("error:");
+   //::perror("error:");
    if(c==0)
        state=ssConnected;
    return c==0;
@@ -105,7 +105,7 @@ bool GBLSocket :: receiveData(ByteArray &data)
 bool GBLSocket :: sendData(string data)
 {
 
-    std::cout << data << std::endl;
+    //std::cout << data << std::endl;
     ::send(sd,static_cast<const char*>(data.data()),data.size(),0);
    return true;
 

@@ -38,7 +38,7 @@ public:
         else
         {
             cout << "bind error"<< endl;
-            perror(0);
+            //perror(0);
         }
 
         if (listen(sock,10)==0)

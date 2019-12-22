@@ -8,4 +8,8 @@ LIBS += -pthread \
         -lGBL
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    gblchatclient.cpp
+
+HEADERS += \
+    gblchatclient.h

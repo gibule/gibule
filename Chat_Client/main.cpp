@@ -9,6 +9,7 @@
 #include "gblchatclient.h"
 #include <../GBL_Library/gblsocket.h>
 #include <../GBL_Library/gbllistener.h>
+#include <istream>
 
 using namespace gbl;
 using namespace std;
@@ -19,11 +20,17 @@ int main()
 
     client.start();
     while(true)
-    {   string s;
-        cin  >> s;
+    {
+        char c[1024];
+        cin.getline(c,1024);
+        string s=string(c);
+       // cout<<s<<endl;
+
+        client.mtx.lock();
 
         client.sndmsg.push_back(s);
 
+        client.mtx.unlock();
         usleep(100);
     }
 

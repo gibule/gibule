@@ -9,6 +9,9 @@
 #include <../GBL_Library/gblsocket.h>
 #include <../GBL_Library/gbllistener.h>
 #include <gblchat.h>
+#include <fstream>
+#include <string>
+
 
 using namespace std;
 using namespace gbl;
@@ -24,6 +27,7 @@ int main ()
     {
 
     }
+
 
 
    /*

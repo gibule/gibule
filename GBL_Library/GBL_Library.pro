@@ -22,7 +22,8 @@ HEADERS += \
     gbllistener.h \
     gblsocket.h \
     gblthread.h \
-    gblworker.h
+    gblworker.h \
+    gblutility.h
 
 unix {
     target.path = /usr/lib

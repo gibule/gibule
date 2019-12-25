@@ -2,6 +2,9 @@
 #define GBLCHAT_H
 
 #include "../GBL_Library/gblworker.h"
+#include <fstream>
+#include "../GBL_Library/gblutility.h"
+
 
 class GBLChat : public GBLWorker
 {
@@ -11,6 +14,7 @@ public:
     void onstart();
     void onwork();
     void onstop();
+
 
 };
 

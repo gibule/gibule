@@ -28,6 +28,8 @@ public:
 
    map<string,GBLWorker*> *workers;
    mutex *listmtx;
+     vector <string> sendbuff;
+
 
 
 };

@@ -51,7 +51,21 @@ void GBLSocket::close()
 
  int GBLSocket::init_socket()
 {
-    sd = socket(AF_INET, SOCK_STREAM, 0);
+//     fstream f;
+//     string a;
+//     vector <string> v;
+
+//     f.open("/home/dato/Projects/gibule/gibule/socket.cnfg",fstream::in);
+//     while(!f.eof())
+//     {
+//         f>>a;
+//         split(a,"=",v);
+
+
+
+//     }
+//     f.close();
+    sd = socket(AF_INET, SOCK_STREAM,0);
     state = ssNew;
     return  (sd);
 }
@@ -123,7 +137,7 @@ bool GBLSocket :: receiveData(string &data)
     {
         state = ssDisconnected;
     }
-    //std::cout << "============  " << r << " state= " << state << std::endl;
+    std::cout << "============  " << r << " state= " << state << std::endl;
     return r > 0;
 }
 

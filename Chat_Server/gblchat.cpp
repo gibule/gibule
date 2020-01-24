@@ -31,6 +31,8 @@ void GBLChat::onwork()
         split(s,"@",s1);
 
 
+        /*
+        cout << s1.size() << endl;
 
         cout << s <<  "Your IP IS: "<<"\t"<<s1.at(0)<<endl;
 
@@ -40,20 +42,21 @@ void GBLChat::onwork()
         {
             cout<<"Message is"<<"\t"<<s1.at(i)<<endl;
         }
-
-    }
-
-    map <string,GBLWorker*>::iterator it;
-    mtx.lock();
-    for (it=workers->begin();it!=workers->end();it++)
-    {
-        if(it->first==s1.at(0))
+        */
+        map <string,GBLWorker*>::iterator it;
+        mtx.lock();
+        for (it=workers->begin();it!=workers->end();it++)
         {
-            it->second->sendbuff.push_back(s1.at(1));
+            if(it->first==s1.at(0))
+            {
+                it->second->sendbuff.push_back(s1.at(1));
 
+            }
         }
+        mtx.unlock();
+
     }
-    mtx.unlock();
+
     vector <string>:: iterator it2;
     mtx.lock();
     for (it2=sendbuff.begin();it2!=sendbuff.end();  it2++)
@@ -61,6 +64,7 @@ void GBLChat::onwork()
 
         wsd.sendData(*it2);
     }
+    sendbuff.clear();
      mtx.unlock();
 
     if(wsd.getState()==ssDisconnected)

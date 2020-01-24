@@ -10,13 +10,31 @@
 #include <../GBL_Library/gblsocket.h>
 #include <../GBL_Library/gbllistener.h>
 #include <istream>
+#include <fstream>
+#include <../GBL_Library/gblutility.h>
 
 using namespace gbl;
 using namespace std;
 
 int main()
 {
-    GBLChatClient client("127.0.0.1",1234);
+    fstream f;
+    string a;
+    vector <string> v;
+
+    f.open("/home/dato/Projects/gibule/gibule/client.cnfg",fstream::in);
+    while(!f.eof())
+    {
+        f>>a;
+        split(a,"=",v);
+
+
+    }
+
+
+
+
+    GBLChatClient client(v.at(1),stoi(v.at(3)));
 
     client.start();
     while(true)

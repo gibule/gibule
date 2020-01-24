@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <../GBL_Library/gblsocket.h>
 #include <../GBL_Library/gbllistener.h>
+
 #include <gblchat.h>
 #include <fstream>
 #include <string>
@@ -18,8 +19,25 @@ using namespace gbl;
 int main ()
 {
 
+    fstream f;
+    string a;
+    vector <string> v;
 
-    Sockaddress sa("127.0.0.1", 1234);
+    f.open("/home/dato/Projects/gibule/gibule/server.cnfg",fstream::in);
+    while(!f.eof())
+    {
+        f>>a;
+        split(a,",",v);
+
+
+
+    }
+    f.close();
+//cout <<v.at(1)<<v.at(3)<<endl;
+    unsigned short int port;
+    port=stol(v.at(3));
+
+    Sockaddress sa(v.at(1), port);
 
     GBLListener<GBLChat> listener(sa);
     listener.start();

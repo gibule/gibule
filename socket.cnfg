@@ -1,0 +1,3 @@
+domain=AF_INET
+type=SOCK_STREAM
+protocol=0

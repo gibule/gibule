@@ -12,6 +12,8 @@
 #include <atomic>
 #include <mutex>
 #include <vector>
+#include<fstream>
+
 
 using namespace std;
 
@@ -33,7 +35,7 @@ class Sockaddress
 public:
 
     Sockaddress();
-    Sockaddress(string s, unsigned short int a);
+    Sockaddress(string s,  unsigned short int a);
 
     string getAddress();
 

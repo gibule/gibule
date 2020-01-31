@@ -15,12 +15,14 @@ public:
     void onwork();
     void onstop();
 
-
+    QStringList datalist;
     Sockaddress sa;
     GBLSocket socket;
     vector<string> recvmsg;
     vector<string> sndmsg;
 
+    vector<string> sndreg;
+    vector<string> sndlog;
 };
 
 #endif // GBL_CHAT_CLIENT_H

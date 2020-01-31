@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+    #include "mainwindow.h"
 #include <QApplication>
 #include <iostream>
 #include <sys/types.h>
@@ -12,40 +12,40 @@
 #include <../GBL_Library/gbllistener.h>
 #include <istream>
 #include <fstream>
-
 #include <gbl_chat_client.h>
 #include <mutex>
+#include <dialog.h>
+#include <QWidget>
 
 //#include "gbl_worker.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    Dialog dialog;
     MainWindow w;
-    w.show();
+    GBL_Chat_Client client("192.168.0.111",1234);
+    w.client=&client;
+    dialog.client=&client;
+    client.start();
 
-//    GBL_Worker worker;
-//    w.worker=&worker;
-//    worker.start();
-
-
-
-     GBL_Chat_Client client("192.168.0.106",1234);
-     client.start();
-//    while(true)
-//    {
-//        char c[1024];
-//        cin.getline(c,1024);
-//        string s=string(c);
+    if (dialog.exec()==1)
+    {
 
 
-//        mtx.lock();
+        w.show();
 
-//        client.sndmsg.push_back(s);
-//        mtx.unlock();
-//        usleep(100);
-//    }
+        return a.exec();
+    }
 
 
-    return a.exec();
+
+
+
+
+
+
+
+
+
 }

@@ -3,13 +3,17 @@
 #include <QString>
 #include <QDebug>
 #include <QColor>
-#include <gbl_chat_client.h>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    connect(&timer,SIGNAL(timeout()),this,SLOT(ontimer()));
+    timer.start(1000);
+
 
 }
 
@@ -24,7 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
 
-    GBL_Chat_Client c;
+
 
     QString s;
     s=ui->textEdit_2->toPlainText();
@@ -32,9 +36,23 @@ void MainWindow::on_pushButton_clicked()
     ui->textEdit->append("Me: "+s);
     ui->textEdit_2->clear();
     ui->textEdit_2->setFocus();
-    c.sndmsg.push_back(s.toStdString());
+    client->sndmsg.push_back(s.toStdString());
 
 
 
+
+}
+void MainWindow::ontimer()
+{
+    ui->textEdit->setTextColor(QColor(0,0,0));
+
+    //ui->textEdit->append(QString::number(client->datalist.size()));
+
+    //qDebug() << "===============";// << client->datalist.size();
+    for (int i = 0; i < client->datalist.size(); ++i)
+    {
+        ui->textEdit->append("Guest: "+client->datalist.at(i));
+    }
+    client->datalist.clear();
 
 }

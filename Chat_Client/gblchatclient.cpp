@@ -25,7 +25,7 @@ void GBLChatClient::onwork()
     vector<string> :: iterator it;
     for (it=sndmsg.begin();it!=sndmsg.end();it++)
     {
-        socket.sendData(string("127.0.0.1@")+*it);
+        socket.sendData(string("192.168.0.114@")+*it);
     }
     sndmsg.clear();
     sleep(1);

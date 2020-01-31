@@ -22,20 +22,20 @@ int main()
     string a;
     vector <string> v;
 
-    f.open("/home/dato/Projects/gibule/gibule/client.cnfg",fstream::in);
-    while(!f.eof())
-    {
-        f>>a;
-        split(a,"=",v);
+//    f.open("/home/dato/Projects/gibule/gibule/client.cnfg",fstream::in);
+//    while(!f.eof())
+//    {
+//        f>>a;
+//        split(a,"=",v);
 
 
-    }
+//    }
 
 
 
 
-    GBLChatClient client(v.at(1),stoi(v.at(3)));
-
+//    GBLChatClient client(v.at(1),stoi(v.at(3)));
+GBLChatClient client("192.168.111",1234);
     client.start();
     while(true)
     {

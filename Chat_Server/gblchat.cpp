@@ -1,5 +1,7 @@
 #include "gblchat.h"
 #include "../GBL_Library/gbllistener.h"
+#include <fstream>
+#include <map>
 
 GBLChat::GBLChat()
 {
@@ -30,52 +32,100 @@ void GBLChat::onwork()
     {
         split(s,"@",s1);
 
+        std::cout << s << std::endl;
 
-        /*
-        cout << s1.size() << endl;
-
-        cout << s <<  "Your IP IS: "<<"\t"<<s1.at(0)<<endl;
-
-
-        unsigned long int size=s1.size();
-        for (ulong i=1; i<size; i++)
+        if (s1.at(0)=="REG")
         {
-            cout<<"Message is"<<"\t"<<s1.at(i)<<endl;
-        }
-        */
-        map <string,GBLWorker*>::iterator it;
-        mtx.lock();
-        for (it=workers->begin();it!=workers->end();it++)
-        {
-            if(it->first==s1.at(0))
+            fstream file;
+            fstream file1;
+            string regreq=s1.at(1);
+            string reglist;
+            map<string,string> m;
+            vector<string> vreglist;
+            vector <string> vregreq;
+                 split (regreq,"$",vregreq);
+            file.open("/home/dato/Projects/gibule/gibule/Registration",fstream::in);
+            while (!file.eof())
             {
-                it->second->sendbuff.push_back(s1.at(1));
+                file>>reglist;
+                split(reglist,"$",vreglist);
+                m.insert(pair<string,string>(vreglist.at(0),vreglist.at(1)));
+
 
             }
+            file.close();
+            map<string,string>::iterator it;
+            for (it=m.begin();it!=m.end();it++)
+            {
+               if(vregreq.at(0)==it->first)
+               {
+
+                  //gavugzavnot false
+                   wsd.sendData("Declined");
+               }
+               else
+               {
+                   file1.open("/home/dato/Projects/gibule/gibule/Registration",fstream::app);
+
+
+                   file1<<regreq;
+
+                   regreq.clear();
+                   file1.close();
+                   wsd.sendData("Accepted");
+
+
+               }
+
+
+
+            }
+
+
         }
+        else if (s1.at(0)=="LOG")
+        {
+
+        }
+        else {
+
+
+
+
+
+            map <string,GBLWorker*>::iterator it;
+            mtx.lock();
+            for (it=workers->begin();it!=workers->end();it++)
+            {
+                if(it->first==s1.at(0))
+                {
+                    it->second->sendbuff.push_back(s1.at(1));
+
+                }
+            }
+            mtx.unlock();
+
+        }
+
+        vector <string>:: iterator it2;
+        mtx.lock();
+        for (it2=sendbuff.begin();it2!=sendbuff.end();  it2++)
+        {
+
+            wsd.sendData(*it2);
+        }
+        sendbuff.clear();
         mtx.unlock();
 
+        if(wsd.getState()==ssDisconnected)
+        {
+            stop();
+            cout << "Connection closed" << std::endl;
+        }
+
+        usleep(100);
     }
-
-    vector <string>:: iterator it2;
-    mtx.lock();
-    for (it2=sendbuff.begin();it2!=sendbuff.end();  it2++)
-    {
-
-        wsd.sendData(*it2);
-    }
-    sendbuff.clear();
-     mtx.unlock();
-
-    if(wsd.getState()==ssDisconnected)
-    {
-        stop();
-        cout << "Connection closed" << std::endl;
-    }
-
-    usleep(100);
 }
-
 void GBLChat::onstop()
 {
     cout << "Thread Stopped" << std::endl;

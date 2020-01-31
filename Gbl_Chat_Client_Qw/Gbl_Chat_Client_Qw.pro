@@ -33,17 +33,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     gbl_chat_client.cpp \
-    gbl_worker.cpp
+    gbl_worker.cpp \
+    dialog.cpp
 
 
 HEADERS += \
         mainwindow.h \
     gbl_chat_client.h \
-    gbl_worker.h
+    gbl_worker.h \
+    dialog.h
 
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

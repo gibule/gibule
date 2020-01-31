@@ -65,7 +65,7 @@ void GBLSocket::close()
 
 //     }
 //     f.close();
-    sd = socket(AF_INET, SOCK_STREAM,0);
+    sd = socket(AF_INET,SOCK_STREAM,0);
     state = ssNew;
     return  (sd);
 }
@@ -137,7 +137,7 @@ bool GBLSocket :: receiveData(string &data)
     {
         state = ssDisconnected;
     }
-    std::cout << "============  " << r << " state= " << state << std::endl;
+    //std::cout << "============  " << r << " state= " << state << std::endl;
     return r > 0;
 }
 

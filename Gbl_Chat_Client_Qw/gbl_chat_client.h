@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <gbl_worker.h>
 
+
 class GBL_Chat_Client : public GBL_Worker
 {
 public:
@@ -14,6 +15,8 @@ public:
     void onstart();
     void onwork();
     void onstop();
+
+    QString regresult,logresult;
 
     QStringList datalist;
     Sockaddress sa;

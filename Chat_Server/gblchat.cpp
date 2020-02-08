@@ -43,43 +43,49 @@ void GBLChat::onwork()
             map<string,string> m;
             vector<string> vreglist;
             vector <string> vregreq;
-                 split (regreq,"$",vregreq);
+            split (regreq,"$",vregreq);
             file.open("/home/dato/Projects/gibule/gibule/Registration",fstream::in);
             while (!file.eof())
             {
                 file>>reglist;
-                split(reglist,"$",vreglist);
-                m.insert(pair<string,string>(vreglist.at(0),vreglist.at(1)));
+                if (reglist!="")
+                {
+                    split(reglist,"$",vreglist);
+                    if (vreglist.size()==2)
+                    {
+                        m.insert(pair<string,string>(vreglist.at(0),vreglist.at(1)));
 
-
+                    }
+                }
             }
             file.close();
             map<string,string>::iterator it;
-            for (it=m.begin();it!=m.end();it++)
+            //            for (it=m.begin();it!=m.end();it++)
+
+
+            if(m.find(vregreq.at(0))!=m.end())
             {
-               if(vregreq.at(0)==it->first)
-               {
 
-                  //gavugzavnot false
-                   wsd.sendData("Declined");
-               }
-               else
-               {
-                   file1.open("/home/dato/Projects/gibule/gibule/Registration",fstream::app);
+                //gavugzavnot false
+                wsd.sendData("Declined");
+            }
+            else
+            {
+                file1.open("/home/dato/Projects/gibule/gibule/Registration",fstream::app);
 
 
-                   file1<<regreq;
+                file1<<regreq<<endl;
 
-                   regreq.clear();
-                   file1.close();
-                   wsd.sendData("Accepted");
-
-
-               }
-
+                regreq.clear();
+                file1.close();
+                wsd.sendData("Accepted");
 
 
             }
+
+
+
+
 
 
         }

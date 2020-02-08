@@ -9,6 +9,8 @@ Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
+//    ui->label_2->text()=client->logresult;
+//    ui->label->text()=client->regresult;
     ui->setupUi(this);
 }
 
@@ -26,7 +28,7 @@ void Dialog::on_pushButton_clicked()
     logmsg=usrlog+"$"+pwdlog;
     client->sndlog.push_back(logmsg.toStdString());
 
- accept();
+    accept();
 }
 
 void Dialog::on_pushButton_2_clicked()

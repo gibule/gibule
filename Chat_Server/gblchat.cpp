@@ -36,57 +36,124 @@ void GBLChat::onwork()
 
         if (s1.at(0)=="REG")
         {
+
             fstream file;
-            fstream file1;
+            fstream file4reg;
             string regreq=s1.at(1);
             string reglist;
-            map<string,string> m;
+            map<string,string> mreg;
             vector<string> vreglist;
             vector <string> vregreq;
-                 split (regreq,"$",vregreq);
-            file.open("/home/dato/Projects/gibule/gibule/Registration",fstream::in);
+            split (regreq,"$",vregreq);
+            file.open("/home/levan/gibule/gibule/Registration",fstream::in);
             while (!file.eof())
             {
                 file>>reglist;
-                split(reglist,"$",vreglist);
-                m.insert(pair<string,string>(vreglist.at(0),vreglist.at(1)));
+                //                cout << reglist;
+                if (reglist!="")
+                {
+                    split(reglist,"$",vreglist);
+
+
+                    for (uint i=0;i<vreglist.size();i=i+2)
+                    {
+
+
+                        mreg.insert(pair<string,string>(vreglist.at(i),vreglist.at(i+1)));
+                    }
+
+
+                }
 
 
             }
             file.close();
+
             map<string,string>::iterator it;
-            for (it=m.begin();it!=m.end();it++)
+
+            //            for (it=m.begin();it!=m.end();it++)
+            //            {
+            //                cout<<it->first<<endl<<it->second<<endl;
+
+
+            //            }
+
+
+            if(mreg.find(vregreq.at(0))!=mreg.end())
             {
-               if(vregreq.at(0)==it->first)
-               {
 
-                  //gavugzavnot false
-                   wsd.sendData("Declined");
-               }
-               else
-               {
-                   file1.open("/home/dato/Projects/gibule/gibule/Registration",fstream::app);
+                //gavugzavnot false
+                wsd.sendData("Declined");
+            }
+            else
+            {
+                file4reg.open("/home/levan/gibule/gibule/Registration",fstream::app);
 
 
-                   file1<<regreq;
+                file4reg<<regreq << endl;
 
-                   regreq.clear();
-                   file1.close();
-                   wsd.sendData("Accepted");
-
-
-               }
-
+                regreq.clear();
+                file4reg.close();
+                wsd.sendData("Accepted");
 
 
             }
+
+
+
+
 
 
         }
         else if (s1.at(0)=="LOG")
         {
+            fstream file4log;
+            string logreq=s1.at(1);
+            string loglist;
+            map<string,string> mlog;
+            vector<string> vloglist;
+            vector <string> vlogreq;
+            split(logreq,"$",vlogreq);
+            file4log.open("/home/levan/gibule/gibule/Registration",fstream::in);
+            while (!file4log.eof())
+            {
+
+                file4log>>loglist;
+                if (loglist!="")
+                {
+                    split(loglist,"$",vloglist);
+
+                    for (uint i=0;i<vloglist.size();i=i+2)
+                    {
+
+                        mlog.insert(pair<string,string>(vloglist.at(i),vloglist.at(i+1)));
+                    }
+
+                }
+
+            }
+            file4log.close();
+            if(mlog.find(vlogreq.at(0))==mlog.end())
+            {
+
+                //gavugzavnot false
+                wsd.sendData("Declined");
+            }
+            else if (mlog.find(vlogreq.at(0))->second==vlogreq.at(1))
+            {
+
+                logreq.clear();
+
+                wsd.sendData("Accepted");
+
+
+            }
+
+
+
 
         }
+
         else {
 
 

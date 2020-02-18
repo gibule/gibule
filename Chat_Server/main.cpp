@@ -23,21 +23,21 @@ int main ()
     string a;
     vector <string> v;
 
-    f.open("/home/dato/Projects/gibule/gibule/server.cnfg",fstream::in);
-    while(!f.eof())
-    {
-        f>>a;
-        split(a,",",v);
+//    f.open("/home/levan/Projects/gibule/gibule/server.cnfg",fstream::in);
+//    while(!f.eof())
+//    {
+//        f>>a;
+//        split(a,",",v);
 
 
 
-    }
-    f.close();
+//    }
+//    f.close();
 //cout <<v.at(1)<<v.at(3)<<endl;
-    unsigned short int port;
-    port=stol(v.at(3));
+ //   unsigned short int port;
+ //   port=stol(v.at(3));
 
-    Sockaddress sa(v.at(1), port);
+    Sockaddress sa("192.168.0.111", 1234);
 
     GBLListener<GBLChat> listener(sa);
     listener.start();
